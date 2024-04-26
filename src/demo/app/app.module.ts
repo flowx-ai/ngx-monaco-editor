@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -29,8 +28,7 @@ import { MonacoEditorModule, MONACO_PATH } from '../../ngx-monaco-editor/src/pub
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatDividerModule,
-    FlexLayoutModule
+    MatDividerModule
   ],
   providers: [
     {

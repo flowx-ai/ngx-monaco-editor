@@ -28,33 +28,91 @@
   }
   mat-card {
     padding: 0;
+    display: block;
     margin: 15px;
-    height: auto;
-  }
-  .basic-examples {
-    min-height: 300px;
-    > div {
-      min-width: 300px;
-      min-height: 300px;
-    }
   }
 
-  .form-infos {
-    margin: 0 15px;
-    h4 {
-      margin: 10px 0;
+  
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.editor-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .selects {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.basic-examples {
+  display: flex;
+  flex-direction: row;
+  min-height: 300px;
+  align-items: stretch;
+  justify-content: stretch;
+;
+  > div {
+    min-width: 300px;
+    min-height: 300px;
+  }
+  > .basic-example {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: 300px;
+    width: 100%;
+  }
+
+}
+.basic-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  height: 300px;
+  min-height: 300px;
+}
+
+.form-example {
+  display: flex !important;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.form-container {
+  display: block;
+  min-height: 300px;
+  min-width: 50%;
+}
+
+.form-infos {
+  margin: 0 15px;
+  width: 100%;
+  h4 {
+    margin: 10px 0;
+  }
+  .form-info {
+    margin-bottom: 10px;
+    span:last-child {
+      font-weight: bold;
     }
-    .form-info {
-      margin-bottom: 10px;
-      span:last-child {
-        font-weight: bold;
-      }
-    }
-    pre {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      background: #eeee;
-      padding: 10px;
-    }
+  }
+  pre {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #eeee;
+    padding: 10px;
   }
 }
