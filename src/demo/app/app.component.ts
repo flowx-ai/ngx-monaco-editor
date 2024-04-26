@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { MonacoEditorConstructionOptions, MonacoEditorLoaderService } from '@materia-ui/ngx-monaco-editor';
+import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
+import { MonacoEditorConstructionOptions, MonacoEditorLoaderService } from '../../ngx-monaco-editor/src/public_api';
 import { take, filter } from 'rxjs/operators';
 import {
   colors,
@@ -28,11 +28,11 @@ export class AppComponent {
   sqlRequest = "SELECT * FROM user;";
   modifiedSqlRequest = "SELECT * FROM user\nWHERE id = 1;"
 
-  public reactiveForm: FormGroup;
+  public reactiveForm: UntypedFormGroup;
   displayJson: boolean;
   modelUri: monaco.Uri;
 
-  constructor(private fb: FormBuilder, private monacoLoader: MonacoEditorLoaderService) {
+  constructor(private fb: UntypedFormBuilder, private monacoLoader: MonacoEditorLoaderService) {
     this.reactiveForm = this.fb.group({
       code: [location],
       json: [colors]
