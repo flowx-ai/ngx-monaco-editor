@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
-import { MonacoEditorConstructionOptions, MonacoEditorLoaderService } from '@materia-ui/ngx-monaco-editor';
+import { MonacoEditorConstructionOptions, MonacoEditorLoaderService } from '../../ngx-monaco-editor/src/public_api';
 import { take, filter } from 'rxjs/operators';
 import {
   colors,
