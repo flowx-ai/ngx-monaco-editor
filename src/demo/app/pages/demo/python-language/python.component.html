@@ -1,0 +1,72 @@
+<h2 class="p-headline">PYTHON Component</h2>
+
+<div>
+  <p-card header="PYTHON">
+    <div class="basic-flex">
+      <p-toolbar>
+        <div class="p-toolbar-group-start">
+          <p-button label="Format Code" class="mr-2" (onClick)="formatCode()" />
+        </div>
+      </p-toolbar>
+      <ngx-monaco-editor
+        [(ngModel)]="pyCode"
+        [options]="mergeOptions({ language: 'python' })"
+        [dataModel]="dataModel"
+      >
+      </ngx-monaco-editor>
+    </div>
+  </p-card>
+</div>
+
+<!-- <h2 class="p-headline">Basic Examples</h2>
+      <div class="basic-examples">
+        <div class="basic-example">
+          <p-card header="MVEL">
+            <div class="basic-flex">
+              <ngx-monaco-editor
+                [(ngModel)]="mvelCode"
+                [options]="mergeOptions({ language: 'java' })"
+                [dataModel]="dataModel"
+              >
+              </ngx-monaco-editor>
+            </div>
+          </p-card>
+        </div>
+        <div class="basic-example">
+          <p-card header="Javascript">
+            <div class="basic-flex">
+              <ngx-monaco-editor
+                [(ngModel)]="jsCode"
+                [options]="mergeOptions({ language: 'javascript' })"
+                [dataModel]="dataModel"
+              >
+              </ngx-monaco-editor>
+            </div>
+          </p-card>
+        </div>
+        <div class="basic-example">
+          <p-card header="Python">
+            <div class="basic-flex">
+              <ngx-monaco-editor
+                [(ngModel)]="pyCode"
+                [options]="mergeOptions({ language: 'python' })"
+                [dataModel]="dataModel"
+              >
+              </ngx-monaco-editor>
+            </div>
+          </p-card>
+        </div>
+        <div class="basic-example">
+          <p-card header="Groovy">
+            <div class="basic-flex">
+              <ngx-monaco-editor
+                [(ngModel)]="groovyCode"
+                [options]="mergeOptions({ language: 'java' })"
+                [dataModel]="dataModel"
+              >
+              </ngx-monaco-editor>
+            </div>
+          </p-card>
+        </div>
+      </div>
+      <p-divider></p-divider> -->

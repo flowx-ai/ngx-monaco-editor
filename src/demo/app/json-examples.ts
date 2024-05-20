@@ -1,70 +1,89 @@
-export const colors = `{
-  "colors": [
-    {
-      "color": "black",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,255,255,1],
-        "hex": "#000"
-      }
-    },
-    {
-      "color": "white",
-      "category": "value",
-      "code": {
-        "rgba": [0,0,0,1],
-        "hex": "#FFF"
-      }
-    },
-    {
-      "color": "red",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,0,0,1],
-        "hex": "#FF0"
-      }
-    },
-    {
-      "color": "blue",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [0,0,255,1],
-        "hex": "#00F"
-      }
-    },
-    {
-      "color": "yellow",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,255,0,1],
-        "hex": "#FF0"
-      }
-    },
-    {
-      "color": "green",
-      "category": "hue",
-      "type": "secondary",
-      "code": {
-        "rgba": [0,255,0,1],
-        "hex": "#0F0"
-      }
-    }
-  ]
-}`;
+export const EXAMPLE_JSON = `{
+  "app": {"valid": \${app.valid}}}`;
 
-export const location = `{
-  "city": "Boardman",
-  "country": "United States",
-  "countryCode": "US",
-  "isp": "Test",
-  "lat": 49.8696,
-  "lon": -128.688,
-  "org": "Test",
-  "regionName": "Oregon",
-  "timezone": "America\/Los_Angeles",
-  "zip": "97818"
-}`;
+export const mvelCode = `// Define a class named Person
+class Person {
+    // Declare class properties
+    String name;
+    int age;
+
+    // Constructor
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to return a greeting
+    String greet() {
+        return "Hello, my name is " + name + " and I am " + age + " years old.";
+    }
+}
+
+// Instantiate a Person object
+Person person = new Person("Alice", 30);
+
+// Call the greet method and print the result
+System.out.println(person.greet());
+`;
+
+export const pyCode = `# Define a class named Person
+class Person:
+    # Constructor
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    # Method to return a greeting
+    def greet(self):
+        return f"Hello, my name is {self.name} and I am {self.age} years old."
+
+# Instantiate a Person object
+person = Person("Alice", 30)
+
+# Call the greet method and print the result
+print(person.greet())
+`;
+export const jsCode = `// Define a class named Person
+class Person {
+    // Constructor
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to return a greeting
+    greet() {
+        return 'Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old.';
+    }
+}
+
+// Instantiate a Person object
+const person = new Person("Alice", 30);
+
+// Call the greet method and print the result
+console.log(person.greet());`;
+
+export const groovyCode = `// Define a class named Person
+class Person {
+    String name
+    int age
+
+    // Constructor
+    Person(String name, int age) {
+        this.name = name
+        this.age = age
+    }
+
+    // Method to return a greeting
+    String greet() {
+        return "Hello, my name is $name and I am $age years old."
+    }
+}
+
+// Instantiate a Person object
+def person = new Person("Alice", 30)
+
+// Call the greet method and print the result
+println(person.greet())
+
+`;

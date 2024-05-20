@@ -1,0 +1,36 @@
+.layout-main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: space-between;
+    padding: 7rem 2rem 2rem 2rem;
+    margin-left: 300px;
+    transition: margin-left $transitionDuration;
+}
+
+.layout-main {
+    flex: 1 1 auto;
+}
+
+
+.layout-minimal-main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7rem 4rem 4rem 4rem;
+    margin-bottom:4rem;
+}
+
+.layout-minimal-main {
+    display: contents;
+    width: 100%;
+}
+
+
+@media (max-width: 991px) {
+    .layout-main-container {
+        margin:0;
+    }
+}

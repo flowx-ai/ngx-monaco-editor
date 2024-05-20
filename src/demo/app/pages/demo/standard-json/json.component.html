@@ -1,0 +1,53 @@
+<h2 class="p-headline">JSON VALIDATION FOR DATASOURCE</h2>
+
+<div>
+  <p-card header="JSON with validation schema">
+    <div class="form-example">
+      <div class="form-infos">
+        <h4 class="p-title">Form control</h4>
+        <div class="form-info">
+          <span>Valid:</span>
+          <span
+            [style.color]="
+              reactiveForm['controls']?.code?.valid ? 'green' : 'red'
+            "
+            >&nbsp;{{ reactiveForm["controls"]?.code?.valid }}</span
+          >
+        </div>
+        <div class="form-info">
+          <span>Touched:</span>
+          <span
+            [style.color]="
+              reactiveForm['controls']?.code?.touched ? 'green' : 'red'
+            "
+            >&nbsp;{{ reactiveForm["controls"]?.code?.touched }}</span
+          >
+        </div>
+        <div class="form-info">
+          <span>Value</span>
+          <pre>{{ reactiveForm.value?.code }}</pre>
+        </div>
+        <div class="form-info">
+          <span>Errors</span>
+          <pre>{{ reactiveForm["controls"]?.code?.errors | json }}</pre>
+        </div>
+      </div>
+      <div class="form-container">
+        <p-toolbar>
+          <div class="p-toolbar-group-start">
+            <p-button label="Format Code"  class="mr-2" (onClick)="formatCode()" />
+          </div>
+        </p-toolbar>
+        <form [formGroup]="reactiveForm" class="form-container">
+          <ngx-monaco-editor
+            formControlName="code"
+            [options]="mergeOptions({ language: 'json' })"
+            [uri]="modelUri"
+            [dataModel]="dataModel"
+          >
+          </ngx-monaco-editor>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>

@@ -1,167 +1,31 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z8">
-  <h1>Angular Monaco Editor library demo</h1>
+<div class="layout-topbar">
+  <a class="layout-topbar-logo" routerLink="">NGX-Monaco-Editor for FLOWX.AI</a>
   <span style="display: flex; flex-grow: 1"></span>
-  <h2>Made with <span [style.color]="'red'">&#10084;</span> by Materia Team, enhanced by FlowX</h2>
-
-</mat-toolbar>
-<div class="examples">
-  <div class="editor-options">
-    <h2 class="mat-headline">Monaco Editor Options</h2>
-    <div class="selects">
-      <mat-form-field>
-        <mat-select
-          (selectionChange)="setOptions({ theme: $event.value })"
-          placeholder="Theme"
-          [value]="theme"
-        >
-          <mat-option *ngFor="let t of themes" [value]="t">{{ t }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select
-          (selectionChange)="setOptions({ readOnly: $event.value })"
-          placeholder="Read only"
-          [value]="false"
-        >
-          <mat-option *ngFor="let r of readOnlys" [value]="r">{{
-            r
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select
-          (selectionChange)="setOptions({ minimap: { enabled: $event.value } })"
-          placeholder="Minimap"
-          [value]="true"
-        >
-          <mat-option *ngFor="let a of [true, false]" [value]="a">{{
-            a
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <p-tabMenu [model]="items">
+    <ng-template pTemplate="item" let-item>
+      <ng-container *ngIf="item.route; else elseBlock">
+        <a [routerLink]="item.route" class="p-menuitem-link">
+          <span [class]="item.icon"></span>
+          <span class="ml-2">
+            {{ item.label }}
+          </span>
+        </a>
+      </ng-container>
+      <ng-template #elseBlock>
+        <a [href]="item.url" class="p-menuitem-link">
+          <span [class]="item.icon"></span>
+          <span class="ml-2">
+            {{ item.label }}
+          </span>
+        </a>
+      </ng-template>
+    </ng-template>
+  </p-tabMenu>
+</div>
+<div class="layout-minimal-main-container">
+  <div class="layout-minimal-main">
+    <div class="examples">
+      <router-outlet></router-outlet>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-  <h2 class="mat-headline">Basic Examples</h2>
-  <div class="basic-examples">
-    <div class="basic-example">
-      <h3 class="mat-title">Typescript</h3>
-      <mat-card class="basic-flex">
-        <ngx-monaco-editor
-          [(ngModel)]="typescriptCode"
-          [options]="mergeOptions({ language: 'typescript' })"
-        >
-        </ngx-monaco-editor>
-      </mat-card>
-    </div>
-    <div class="basic-example">
-      <h3 class="mat-title">Simple text</h3>
-      <mat-card class="basic-flex">
-        <ngx-monaco-editor [(ngModel)]="simpleText" [options]="mergeOptions()">
-        </ngx-monaco-editor>
-      </mat-card>
-    </div>
-    <div class="basic-example">
-      <h3 class="mat-title">SQL</h3>
-      <mat-card class="basic-flex">
-        <ngx-monaco-editor
-          [(ngModel)]="sqlRequest"
-          [options]="mergeOptions({ language: 'sql' })"
-        >
-        </ngx-monaco-editor>
-      </mat-card>
-    </div>
-  </div>
-  <mat-divider></mat-divider>
-  <h2 class="mat-headline">Diffs Editor Example</h2>
-  <h3 class="mat-title">SQL</h3>
-  <mat-card style="height: 300px">
-    <ngx-monaco-diff-editor
-      [options]="mergeOptions({ language: 'sql', renderSideBySide: false })"
-      [original]="sqlRequest"
-      [modified]="modifiedSqlRequest"
-    >
-    </ngx-monaco-diff-editor>
-  </mat-card>
-  <mat-divider></mat-divider>
-  <h2 class="mat-headline">Reactive Form Example</h2>
-  <div >
-    <h3 class="mat-title">JSON</h3>
-    <mat-card class="form-example">
-      <form [formGroup]="reactiveForm" class="form-container">
-        <ngx-monaco-editor
-          formControlName="json"
-          [options]="mergeOptions({ language: 'json' })"
-        >
-        </ngx-monaco-editor>
-      </form>
-      <div class="form-infos">
-        <h4 class="mat-title">Form control</h4>
-        <div class="form-info">
-          <span>Valid:</span>
-          <span
-            [style.color]="
-              reactiveForm['controls']?.json?.valid ? 'green' : 'red'
-            "
-            >&nbsp;{{ reactiveForm["controls"]?.json?.valid }}</span
-          >
-        </div>
-        <div class="form-info">
-          <span>Touched:</span>
-          <span
-            [style.color]="
-              reactiveForm['controls']?.json?.touched ? 'green' : 'red'
-            "
-            >&nbsp;{{ reactiveForm["controls"]?.json?.touched }}</span
-          >
-        </div>
-        <div class="form-info">
-          <span>Value:</span>
-          <pre>{{ reactiveForm.value?.code }}</pre>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-  <div>
-    <h3 class="mat-title">JSON with validation schema</h3>
-    <mat-card class="form-example">
-      <div class="form-infos">
-        <h4 class="mat-title">Form control</h4>
-        <div class="form-info">
-          <span>Valid:</span>
-          <span
-            [style.color]="
-              reactiveForm['controls']?.code?.valid ? 'green' : 'red'
-            "
-            >&nbsp;{{ reactiveForm["controls"]?.code?.valid }}</span
-          >
-        </div>
-        <div class="form-info">
-          <span>Touched:</span>
-          <span
-            [style.color]="
-              reactiveForm['controls']?.code?.touched ? 'green' : 'red'
-            "
-            >&nbsp;{{ reactiveForm["controls"]?.code?.touched }}</span
-          >
-        </div>
-        <div class="form-info">
-          <span>Value</span>
-          <pre>{{ reactiveForm.value?.code }}</pre>
-        </div>
-        <div class="form-info">
-          <span>Errors</span>
-          <pre>{{ reactiveForm["controls"]?.code?.errors | json }}</pre>
-        </div>
-      </div>
-      <form [formGroup]="reactiveForm" class="form-container">
-        <ngx-monaco-editor
-          formControlName="code"
-          [options]="mergeOptions({ language: 'json' })"
-          [uri]="modelUri"
-        >
-        </ngx-monaco-editor>
-      </form>
-    </mat-card>
   </div>
 </div>

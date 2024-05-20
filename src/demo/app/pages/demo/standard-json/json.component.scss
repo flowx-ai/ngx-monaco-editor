@@ -1,0 +1,125 @@
+
+.examples {
+  margin: 0 5%;
+  width: 100%;
+  mat-toolbar {
+    h1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    h2 {
+      font-size: 15px;
+    }
+  }
+  h2 {
+    text-align: center;
+    margin: 30px;
+  }
+  h3 {
+    text-align: center;
+    color: #2196f3;
+    margin: 10px;
+  }
+  mat-form-field {
+    margin: 15px;
+  }
+  mat-card {
+    padding: 0;
+    display: block;
+    margin: 15px;
+  }
+
+  
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.editor-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .selects {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.basic-examples {
+  display: flex;
+  flex-direction: row;
+  min-height: 300px;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 8px;
+;
+  > div {
+    min-width: 300px;
+    min-height: 300px;
+  }
+  > .basic-example {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: 300px;
+    width: 100%;
+  }
+
+}
+.basic-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  height: 300px;
+  min-height: 300px;
+  align-content: center;
+  justify-content: stretch;
+}
+
+.form-example {
+  display: flex !important;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.form-container {
+  display: block;
+  min-height: 300px;
+  min-width: 50%;
+}
+
+.form-container {
+  display: flex;
+  min-height: 300px;
+  min-width: 50%;
+  flex-direction: column;
+}
+
+.form-infos {
+  margin: 0 15px;
+  width: 100%;
+  h4 {
+    margin: 10px 0;
+  }
+  .form-info {
+    margin-bottom: 10px;
+    span:last-child {
+      font-weight: bold;
+    }
+  }
+  pre {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #eeee;
+    padding: 10px;
+  }
+}
