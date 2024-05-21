@@ -1,198 +1,200 @@
-### Resources
+# ngx-monaco-editor for FlowX.AI
 
-- 🚀 Try it out on [Stackblitz](https://stackblitz.com/edit/materia-ngx-monaco-editor-example)
 
-- 👉 See it in action with our [live demo](https://materiahq.github.io/ngx-monaco-editor)
+This module is based on original ngx-monaco-editor
 
-- 📖 Api reference available [here](https://materiahq.github.io/ngx-monaco-editor/api-reference)
 
-### Angular versions
 
-The library is currently supported by Angular v13.
+## 1. Intercept JSON tokens related to FlowX:
 
-Check older versions support:
-- Angular v6/v7: [v2.x](https://github.com/materiahq/ngx-monaco-editor/tree/2.0.x)
-- Angular v8: [v4.x](https://github.com/materiahq/ngx-monaco-editor/tree/4.0.x)
-- Angular v9 to v12: [5.x](https://github.com/materiahq/ngx-monaco-editor/tree/5.1.x)
+The folder `assets/monaco-editor/dev/vs/language/json` contains the modified language that accept as valid the following type of json code
 
-### Standard installation
 
-Install from npm repository:
-```
-npm install monaco-editor @materia-ui/ngx-monaco-editor --save
- ```
- 
-Add the glob to assets in angular.json (to make monaco-editor lib available to the app):
-```typescript
+```json
 {
-    ...
-    "projects": {
-      "YOUR_APP_NAME": {
-          ...
-          "architect": {
-              "build": {
-                ...
-                "options": {
-                    ...
-                    "assets": [
-                        { "glob": "**/*", "input": "node_modules/monaco-editor", "output": "assets/monaco-editor/" }
-                    ],
-                    ...
-                }
-                ...
-              }
-            }
-            ...
+  "app": {
+    "valid": ${app.valid}
+  }
+}
+```
+
+All the modifications based on bazed libraries are marked with `//FLOWX-UPGRADE` comment
+
+
+## 2. Provide intellisence for process datamodel
+
+The component was modified with the following input property `dataModel` which can receive the entire datamodel from the process.
+
+Once the datamodel is received this is parsed inside the monaco-editor component using the following functions: `flattenNestedObjects` and `groupByParent` the outpul looks like:
+
+```json
+{
+    "root": [
+        {
+            "key": "application",
+            "type": "OBJECT",
+            "description": null,
+            "useInReporting": false
         }
-    },
-    ...
+    ],
+    "application": [
+        {
+            "key": "generateInterface",
+            "parent": "application",
+            "type": "OBJECT",
+            "description": null,
+            "useInReporting": false
+        }
+    ],
+    "application.generateInterface": [
+        {
+            "key": "titleOfForm",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "firstName",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "middleInitial",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "lastName",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "emailAddress",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "homeStreetAddress",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "aptDropdown",
+            "parent": "application.generateInterface",
+            "type": "ENUM",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "city",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "stateDropdown",
+            "parent": "application.generateInterface",
+            "type": "ENUM",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "zipCode",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "homePhone",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "timeAtCurrentAddressYears",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "timeAtCurrentAddressMonths",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "housingStatusDropdown",
+            "parent": "application.generateInterface",
+            "type": "ENUM",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "socialSecurityNumber",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "dateOfBirth",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "driversLicenseLast4",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "saveButton",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        },
+        {
+            "key": "cancelButton",
+            "parent": "application.generateInterface",
+            "type": "STRING",
+            "description": null,
+            "useInReporting": false
+        }
+    ]
 }
- ```
-
-### Sample
-
-
-Include MonacoEditorModule in Main Module and Feature Modules where you want to use the editor component.(eg: app.module.ts): 
-
-```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    MonacoEditorModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}
 ```
 
-
-Create Editor options in component.(eg: app.component.ts)
-
-```typescript
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
-})
-export class AppComponent {
-  editorOptions = {theme: 'vs-dark', language: 'javascript'};
-  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
-  originalCode: string = 'function x() { // TODO }';
-}
-```
+the model is registered using `registerIntelliSense` based on inputlanguage
 
 
-Include editor component in your html with options input and ngModel bindings  (eg: app.component.html) or using ReactiveForm features.
+## 3. Format the code for language
 
-```html
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
-```
+The component has a public function that can be called to format the code. 
+By default the formatter works for couple of language, in order to format the code for java, python, groovy etc you need to provide a language server
+Examples :
 
-Include diff-editor component in your html and use the following inputs: options, original and modified (eg: app.component.html).
+* https://github.com/TypeFox/monaco-languageclient
 
-```html
-<ngx-monaco-diff-editor [options]="editorOptions" [original]="originalCode" [modified]="code"></ngx-monaco-diff-editor>
-```
+* https://langserver.org/
 
-Both components support all available `monaco-editor` options:
-- EditorOptions: https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html,
-- DiffEditorOptions: https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.idiffeditorconstructionoptions.html.
-
-
-### Configure default monaco-editor library path
-
-You can configure the default path used to load the monaco-editor library.
-
-It allows you to either change the localization of your local installed library or load the library from a remote resource.
-
-Example **load monaco-editor from a CDN**:
-
- > ⚠️ Warning: in this case you don't need to install monaco-editor and neither modify angular.json.
-
-```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { MonacoEditorModule, MONACO_PATH } from '@materia-ui/ngx-monaco-editor';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    MonacoEditorModule
-  ],
-  providers: [{
-    provide: MONACO_PATH,
-    useValue: 'https://unpkg.com/monaco-editor@0.24.0/min/vs'
-  }],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}
-```
-### Access editor instance
-
-If you need to retrieve an editor instance you can do so by using the `init` output:
-```html
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" (init)="editorInit($event)"></ngx-monaco-editor>
-```
-
-```typescript
-import { Component } from '@angular/core';
-...
-export class AppComponent {
-  editorOptions = {theme: 'vs-dark', language: 'javascript'};
-  code: string= 'function x() {\nconsole.log("Hello world!");\n}';
-
-  editorInit(editor) {
-    // Here you can access editor instance
-     this.editor = editor;
-    }
-}
-```
-
-### Access Monaco instance
-
-If you need to retrieve `monaco-editor` instance for advance use cases (like defining a custom theme, add custom auto-complete support, etc...), you have to wait until monaco is loaded using our `MonacoEditorLoaderService`:
-
-```typescript
-import { MonacoEditorLoaderService } from '@materia-ui/ngx-monaco-editor';
-...
-constructor(private monacoLoaderService: MonacoEditorLoaderService) {
-      this.monacoLoaderService.isMonacoLoaded$.pipe(
-        filter(isLoaded => isLoaded),
-        take(1),
-      ).subscribe(() => {
-           // here, we retrieve monaco-editor instance
-           monaco.setTheme(...);
-      });
-     }
-```
-
-
-### Motivations
-
-We wanted to use monaco-editor library with angular in our desktop application: [Materia Designer](https://getmateria.com).
-
-The current angular libraries did not cover all of our needs, notably:
-- Works on Browser and Electron application,
-- Support flex-box container and correctly resize editor when container size changes.
+There is also a posibility to use prettier in node.js and send the code to server and format it.
