@@ -23,7 +23,7 @@ import { filter, take } from "rxjs";
 export class PythonComponent implements OnInit {
   theme = "flowx-light";
   themes = ["vs", "vs-dark", "hc-black", "flowx-light", "flowx-dark"];
-  readOnlys = [true, false];
+  
 
   @ViewChild(MonacoEditorComponent) codeEditor: MonacoEditorComponent;
 

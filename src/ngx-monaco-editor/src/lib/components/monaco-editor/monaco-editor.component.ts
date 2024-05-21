@@ -114,10 +114,17 @@ export class MonacoEditorComponent
       });
   }
 
-  formatCode() {
-    setTimeout(() => {
-      this.editor.getAction("editor.action.formatDocument").run();
-    }, 100);
+  async formatCode(): Promise<void> {
+    if (this.options.language === "java") {
+      const formattedCode = this.editor.getValue();
+      //TODO: implement here monaco editor java formatter
+      //this.editor.getAction("editor.action.formatDocument").run();
+      this.editor.setValue(formattedCode);
+    } else {
+      setTimeout(() => {
+        this.editor.getAction("editor.action.formatDocument").run();
+      }, 100);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -188,6 +195,7 @@ export class MonacoEditorComponent
     }
   }
 
+  //TODO: implement custom validation
   validateDataModelFormat(model) {
     const markers = [];
     // lines start at 1
@@ -263,13 +271,16 @@ export class MonacoEditorComponent
       const flattenedObject = parentPath
         ? {
             key: obj.name,
-            parent: parentPath,
+            parent:
+              this.options.language === "json"
+                ? parentPath
+                : "input." + parentPath,
             type: obj.type,
             description: obj.description,
             useInReporting: obj.useInReporting,
           }
         : {
-            key: obj.name,
+            key: this.options.language === "json" ? obj.name : "input." + obj.name,
             type: obj.type,
             description: obj.description,
             useInReporting: obj.useInReporting,
@@ -302,10 +313,10 @@ export class MonacoEditorComponent
 
     if (!!this.completionItemProvider) this.completionItemProvider.dispose();
 
-    console.log("this.options", this.options);
 
     switch (this.options.language) {
       case "json":
+        console.log('grouped', grouped);
         this.completionItemProvider =
           monaco.languages.registerCompletionItemProvider("json", {
             provideCompletionItems: function (model, position) {
@@ -356,7 +367,7 @@ export class MonacoEditorComponent
                             ".`\n Description: " +
                             (property.description ||
                               "No description provided") +
-                            ".`\n Type: " +
+                            ".\n Type: " +
                             property.type,
                           range: range,
                         };
@@ -384,6 +395,7 @@ export class MonacoEditorComponent
             provideCompletionItems: function (model, position) {
               try {
                 var currentWord = model.getWordUntilPosition(position);
+                var currentLine = model.getLineContent(position.lineNumber);
                 var range = {
                   startLineNumber: position.lineNumber,
                   endLineNumber: position.lineNumber,
@@ -414,14 +426,14 @@ export class MonacoEditorComponent
                   if (key !== "root") {
                     if (
                       currentWord.word.endsWith(key + ".") ||
-                      currentWord.word.indexOf(key) >= 0
+                      currentLine.indexOf(key) >= 0
                     ) {
                       const propertyList = grouped[key];
                       propertyList.forEach((property) => {
                         const completion = {
                           kind: monaco.languages.CompletionItemKind.Field,
-                          insertText: property.parent + "." + property.key,
-                          label: property.parent + "." + property.key,
+                          insertText:  property.key,
+                          label: property.key,
                           detail: "Type: " + property.type,
                           documentation:
                             "Press `.` to get `" +
@@ -429,7 +441,7 @@ export class MonacoEditorComponent
                             ".`\n Description: " +
                             (property.description ||
                               "No description provided") +
-                            ".`\n Type: " +
+                            ".\n Type: " +
                             property.type,
                           range: range,
                         };
